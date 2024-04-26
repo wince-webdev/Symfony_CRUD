@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes{% endblock %}
+
+{% block body %}
+	{% for message in app.flashes('message') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<table class="table table-striped mt-4 mx-5 pt-3 table-responsive table-bordered justify-content">
+	<h2 class="text-center bg-warning  mt-4 mx-5 pt-3">
+	<a href="{{ path('create-post') }}">Ajouter une poste</a>
+	</h2>
+  <thead class="bg-primary mt-4 mx-5 pt-3">
+    <tr>
+      <th scope="col">Num</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Contenue</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+	{%for post in posts%}
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ post.title }}</td>
+      <td>{{ post.content }}</td>
+      <td>
+	  	<a href="{{ path('edit-post',{id: post.id}) }}" class="btn btn-success">Modifier</a>
+		<a href="{{ path('delete-post',{id: post.id}) }}" class="btn btn-danger">Supprimer</a>
+	  </td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
